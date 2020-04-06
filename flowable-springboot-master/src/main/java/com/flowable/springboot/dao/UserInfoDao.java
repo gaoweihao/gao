@@ -4,7 +4,7 @@ import com.flowable.springboot.bean.UserInfoEntity;
 
 import java.util.List;
 
-public interface UserInfoDao {//extends JpaRepository<Person, Long>
+public interface UserInfoDao {
 
     UserInfoEntity findByUsername(String username);
 

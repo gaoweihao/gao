@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /flowable-master
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test_flowable?serverTimezone=UTC
+    username: root
+    password: 123456
+
+mybatis:
+  mapper-locations: classpath*:com/flowable/springboot/mapper/*.xml
+
+#启用 flowable 端点
+management:
+  endpoint:
+    flowable:
+      enabled: true

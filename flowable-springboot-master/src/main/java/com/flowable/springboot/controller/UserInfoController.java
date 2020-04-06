@@ -32,7 +32,7 @@ public class UserInfoController {
     @RequestMapping("/select-by-userId/{userId}")
     public UserInfoEntity selectByUserId(@PathVariable long userId) {
         UserInfoEntity user = userInfoService.selectByUserId(userId);
-        System.out.println(user.getUsername());
+        System.out.println(user.getUserName());
        return userInfoService.selectByUserId(userId);
     }
 }

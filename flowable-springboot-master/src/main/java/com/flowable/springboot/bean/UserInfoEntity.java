@@ -1,69 +1,48 @@
 package com.flowable.springboot.bean;
-import java.io.Serializable;
-import java.util.Date;
+
+import com.flowable.springboot.common.BaseEntity;
 
 /**
  * 用户类
  * */
-public class UserInfoEntity implements Serializable {
+public class UserInfoEntity extends BaseEntity {
+    private String userId;
+    private String userName;
+    private String userCode;
+    private String password;
+    // private List<RoleBean> roles = new ArrayList<>();
 
-    private Long id;
 
-    private String username;
+    public String getUserId() {
 
-    private String firstName;
-
-    private String lastName;
-
-    private Date birthDate;
-
-    public UserInfoEntity() {
+        return userId;
     }
 
-    public UserInfoEntity(String username, String firstName, String lastName, Date birthDate) {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public Long getId() {
-        return id;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getPassword() {
+        return password;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
