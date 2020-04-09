@@ -1,7 +1,5 @@
 package com.flowable.springboot.bean;
 
-import com.flowable.springboot.common.BaseEntity;
-
 /**
  * 报销明细
  * @author Administrator

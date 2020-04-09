@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *测试flowable 使用，可以删除
+ * */
 @Controller
 @RequestMapping("/myrest")
 public class MyRestController {

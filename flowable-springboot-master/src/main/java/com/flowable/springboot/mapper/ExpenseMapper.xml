@@ -18,7 +18,7 @@
         <result property="createDate" column="create_date" jdbcType="INTEGER"/>
     </resultMap>
 
-    <insert id="saveExpenseEntity" parameterType="com.yonyougov.fbpm.demo.entity.ExpenseEntity">
+    <insert id="saveExpenseEntity" parameterType="com.flowable.springboot.bean.ExpenseEntity">
         insert into EXPENSES
           (ID,
           TYPE_,
@@ -52,7 +52,7 @@
           )
     </insert>
 
-    <insert id="saveExpenseDetail" parameterType="com.yonyougov.fbpm.demo.entity.ExpenseDetail">
+    <insert id="saveExpenseDetail" parameterType="com.flowable.springboot.bean.ExpenseDetail">
         insert into EXPENSES_DETAIL
           (
           ID,

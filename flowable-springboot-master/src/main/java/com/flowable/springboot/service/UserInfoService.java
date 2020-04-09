@@ -6,5 +6,7 @@ public interface UserInfoService{
 
     int save(UserInfoEntity user);
 
-    UserInfoEntity selectByUserId(long userId);
+    UserInfoEntity selectByUserId(String userId);
+
+    UserInfoEntity findByUserCode(String username);
 }

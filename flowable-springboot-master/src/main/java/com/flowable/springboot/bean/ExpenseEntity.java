@@ -1,7 +1,5 @@
 package com.flowable.springboot.bean;
 
-import com.flowable.springboot.common.BaseEntity;
-
 import java.util.List;
 
 /**

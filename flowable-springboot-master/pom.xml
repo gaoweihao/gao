@@ -47,10 +47,10 @@
         <dependency>
             <groupId>org.flowable</groupId>
             <artifactId>flowable-spring-boot-starter</artifactId>
-            <version>6.3.0</version>
+            <version>6.4.1</version>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
             <version>1.4.1</version>
@@ -59,7 +59,7 @@
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-web</artifactId>
             <version>1.4.1</version>
-        </dependency>
+        </dependency-->
 
         <dependency>
             <groupId>commons-lang</groupId>
@@ -71,6 +71,25 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.11</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
+
+        <!--swagger工作依赖-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <!-- swagger 依赖结束-->
     </dependencies>
 
     <build>

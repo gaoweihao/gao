@@ -1,7 +1,5 @@
 package com.flowable.springboot.bean;
 
-import com.flowable.springboot.common.BaseEntity;
-
 public class RoleBean extends BaseEntity {
     private String name;
 

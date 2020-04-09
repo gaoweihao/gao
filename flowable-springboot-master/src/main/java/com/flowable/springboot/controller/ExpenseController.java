@@ -2,19 +2,17 @@ package com.flowable.springboot.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.flowable.springboot.bean.ExpenseEntity;
-import com.flowable.springboot.bean.ProcTaskInfo;
-import com.flowable.springboot.bean.RoleBean;
-import com.flowable.springboot.bean.UserInfoEntity;
 import com.flowable.springboot.service.ExpenseService;
 import com.flowable.springboot.service.RoleService;
-import com.flowable.springboot.util.HttpUtil;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/expense")
@@ -54,62 +52,63 @@ public class ExpenseController {
     @RequestMapping("/listByPageTask")
     @ResponseBody
     public Object listExpenseEntityBypageTask(@RequestBody Map<String, Object> param) {
-        UserInfoEntity user = (UserInfoEntity) SecurityUtils.getSubject().getPrincipal();
-        String userCode = user.getUserCode();
-        StringBuffer roleId = new StringBuffer();
-
-        List<RoleBean> roles = roleService.queryRolesByUserCode(userCode);
-        if (roles != null && roles.size() != 0) {
-            for (int i = 0; i < roles.size(); i++) {
-                roleId.append(roles.get(i).getId()).append(",");
-            }
-
-        }
-        if (roleId.length() > 0) {
-            roleId.deleteCharAt(roleId.length() - 1);
-        }
-
-        String appCode = (String) param.get("appCode");
-        String bizTypeCode = (String) param.get("bizTypeCode");
-        //String task_url = "http://10.16.21.29:9000/api/runtime/fbpm-user-task/"+userCode;
-        String task_url = taskUrl + "/fbpm-process/api/runtime/fbpm-user-task/taskList?userCode=" + userCode + "&roleId=" + roleId.toString() + "&appCode=" + appCode + "&bizTypeCode=" + bizTypeCode;
-        String res = HttpUtil.doGet(task_url, null);
-        List<ProcTaskInfo> taskList = JSON.parseArray(res, ProcTaskInfo.class);
-        //List<String> processIns = new ArrayList<>();
-        StringBuffer sb = new StringBuffer();
-        if (taskList != null && !taskList.isEmpty()) {
-            for (ProcTaskInfo info : taskList) {
-                sb.append(info.getBusinessKey());
-                sb.append(",");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        Integer state = (Integer) param.get("state");
-        List<ExpenseEntity> list;
-        if (state == 0) {
-            // 未提交标签页查询
-            list = expenseService.queryExpenses(userCode, sb.toString().split(","));
-        } else {
-            // 未审批标签页查询
-            list = expenseService.queryExpenses2(sb.toString().split(","));
-        }
-        List<ExpenseEntity> resultList = new ArrayList<>();
-        for (ExpenseEntity entity : list) {
-            for (ProcTaskInfo info : taskList) {
-                if (info.getBusinessKey().equals(entity.getId())) {
-                    entity.setTaskId(info.getTaskId());
-                    entity.setNodeId(info.getNodeId());
-                    entity.setProcDefId(info.getProcDefId());
-                    entity.setProcessId(info.getProcInstId());
-                    break;
-                }
-            }
-            resultList.add(entity);
-        }
-        Map<String, Object> resp = new HashMap<String, Object>();
-        resp.put("rows", resultList);
-        resp.put("total", resultList.size());
-        return JSON.toJSONString(resp);
+//        UserInfoEntity user = (UserInfoEntity) SecurityUtils.getSubject().getPrincipal();
+//        String userCode = user.getUserCode();
+//        StringBuffer roleId = new StringBuffer();
+//
+//        List<RoleBean> roles = roleService.queryRolesByUserCode(userCode);
+//        if (roles != null && roles.size() != 0) {
+//            for (int i = 0; i < roles.size(); i++) {
+//                roleId.append(roles.get(i).getId()).append(",");
+//            }
+//
+//        }
+//        if (roleId.length() > 0) {
+//            roleId.deleteCharAt(roleId.length() - 1);
+//        }
+//
+//        String appCode = (String) param.get("appCode");
+//        String bizTypeCode = (String) param.get("bizTypeCode");
+//        //String task_url = "http://10.16.21.29:9000/api/runtime/fbpm-user-task/"+userCode;
+//        String task_url = taskUrl + "/fbpm-process/api/runtime/fbpm-user-task/taskList?userCode=" + userCode + "&roleId=" + roleId.toString() + "&appCode=" + appCode + "&bizTypeCode=" + bizTypeCode;
+//        String res = HttpUtil.doGet(task_url, null);
+//        List<ProcTaskInfo> taskList = JSON.parseArray(res, ProcTaskInfo.class);
+//        //List<String> processIns = new ArrayList<>();
+//        StringBuffer sb = new StringBuffer();
+//        if (taskList != null && !taskList.isEmpty()) {
+//            for (ProcTaskInfo info : taskList) {
+//                sb.append(info.getBusinessKey());
+//                sb.append(",");
+//            }
+//            sb.deleteCharAt(sb.length() - 1);
+//        }
+//        Integer state = (Integer) param.get("state");
+//        List<ExpenseEntity> list;
+//        if (state == 0) {
+//            // 未提交标签页查询
+//            list = expenseService.queryExpenses(userCode, sb.toString().split(","));
+//        } else {
+//            // 未审批标签页查询
+//            list = expenseService.queryExpenses2(sb.toString().split(","));
+//        }
+//        List<ExpenseEntity> resultList = new ArrayList<>();
+//        for (ExpenseEntity entity : list) {
+//            for (ProcTaskInfo info : taskList) {
+//                if (info.getBusinessKey().equals(entity.getId())) {
+//                    entity.setTaskId(info.getTaskId());
+//                    entity.setNodeId(info.getNodeId());
+//                    entity.setProcDefId(info.getProcDefId());
+//                    entity.setProcessId(info.getProcInstId());
+//                    break;
+//                }
+//            }
+//            resultList.add(entity);
+//        }
+//        Map<String, Object> resp = new HashMap<String, Object>();
+//        resp.put("rows", resultList);
+//        resp.put("total", resultList.size());
+//        return JSON.toJSONString(resp);
+        return null;
     }
 
     /**
@@ -121,54 +120,55 @@ public class ExpenseController {
     @RequestMapping("/listByPageFinishedTask")
     @ResponseBody
     public Object listExpenseEntityBypageFinishedTask(@RequestBody Map<String, Object> param) {
-        UserInfoEntity user = (UserInfoEntity) SecurityUtils.getSubject().getPrincipal();
-        String userCode = user.getUserCode();
-        String roleId = "";
-
-        List<RoleBean> roles = roleService.queryRolesByUserCode(userCode);
-        if (roles != null && roles.size() != 0) {
-            roleId = roles.get(0).getId();
-
-        }
-        String appCode = (String) param.get("appCode");
-        String bizTypeCode = (String) param.get("bizTypeCode");
-        //String task_url = "http://10.16.21.29:9000/api/runtime/fbpm-user-task/"+userCode;
-        String task_url = taskUrl + "/fbpm-process/api/runtime/fbpm-user-task/finishedTaskList?userCode=" + userCode + "&roleId=" + roleId + "&appCode=" + appCode + "&bizTypeCode=" + bizTypeCode + "&state=014,010";
-        String res = HttpUtil.doGet(task_url, null);
-        List<ProcTaskInfo> taskList = JSON.parseArray(res, ProcTaskInfo.class);
-        //List<String> processIns = new ArrayList<>();
-        StringBuffer sb = new StringBuffer();
-        if (taskList != null && taskList.size() > 0) {
-            for (ProcTaskInfo info : taskList) {
-                sb.append(info.getBusinessKey());
-                sb.append(",");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            List<ExpenseEntity> list = expenseService.queryExpenses2(sb.toString().split(","));
-            List<ExpenseEntity> resultList = new ArrayList<>();
-            for (ExpenseEntity entity : list) {
-                for (ProcTaskInfo info : taskList) {
-                    if (info.getBusinessKey().equals(entity.getId())) {
-                        entity.setTaskId(info.getTaskId());
-                        entity.setNodeId(info.getNodeId());
-                        entity.setProcDefId(info.getProcDefId());
-                        entity.setProcessId(info.getProcInstId());
-                        break;
-                    }
-                }
-                resultList.add(entity);
-            }
-            Map<String, Object> resp = new HashMap<String, Object>();
-            resp.put("rows", resultList);
-            resp.put("total", resultList.size());
-            return JSON.toJSONString(resp);
-        } else {
-            List<ExpenseEntity> resultList = new ArrayList<>();
-            Map<String, Object> resp = new HashMap<String, Object>();
-            resp.put("rows", resultList);
-            resp.put("total", resultList.size());
-            return JSON.toJSONString(resp);
-        }
+//        UserInfoEntity user = (UserInfoEntity) SecurityUtils.getSubject().getPrincipal();
+//        String userCode = user.getUserCode();
+//        String roleId = "";
+//
+//        List<RoleBean> roles = roleService.queryRolesByUserCode(userCode);
+//        if (roles != null && roles.size() != 0) {
+//            roleId = roles.get(0).getId();
+//
+//        }
+//        String appCode = (String) param.get("appCode");
+//        String bizTypeCode = (String) param.get("bizTypeCode");
+//        //String task_url = "http://10.16.21.29:9000/api/runtime/fbpm-user-task/"+userCode;
+//        String task_url = taskUrl + "/fbpm-process/api/runtime/fbpm-user-task/finishedTaskList?userCode=" + userCode + "&roleId=" + roleId + "&appCode=" + appCode + "&bizTypeCode=" + bizTypeCode + "&state=014,010";
+//        String res = HttpUtil.doGet(task_url, null);
+//        List<ProcTaskInfo> taskList = JSON.parseArray(res, ProcTaskInfo.class);
+//        //List<String> processIns = new ArrayList<>();
+//        StringBuffer sb = new StringBuffer();
+//        if (taskList != null && taskList.size() > 0) {
+//            for (ProcTaskInfo info : taskList) {
+//                sb.append(info.getBusinessKey());
+//                sb.append(",");
+//            }
+//            sb.deleteCharAt(sb.length() - 1);
+//            List<ExpenseEntity> list = expenseService.queryExpenses2(sb.toString().split(","));
+//            List<ExpenseEntity> resultList = new ArrayList<>();
+//            for (ExpenseEntity entity : list) {
+//                for (ProcTaskInfo info : taskList) {
+//                    if (info.getBusinessKey().equals(entity.getId())) {
+//                        entity.setTaskId(info.getTaskId());
+//                        entity.setNodeId(info.getNodeId());
+//                        entity.setProcDefId(info.getProcDefId());
+//                        entity.setProcessId(info.getProcInstId());
+//                        break;
+//                    }
+//                }
+//                resultList.add(entity);
+//            }
+//            Map<String, Object> resp = new HashMap<String, Object>();
+//            resp.put("rows", resultList);
+//            resp.put("total", resultList.size());
+//            return JSON.toJSONString(resp);
+//        } else {
+//            List<ExpenseEntity> resultList = new ArrayList<>();
+//            Map<String, Object> resp = new HashMap<String, Object>();
+//            resp.put("rows", resultList);
+//            resp.put("total", resultList.size());
+//            return JSON.toJSONString(resp);
+//        }
+        return null;
     }
 
     @RequestMapping("/detail")

@@ -12,5 +12,7 @@ public interface UserInfoDao {
 
     List<UserInfoEntity> findList();
 
-    UserInfoEntity selectByUserId(long userId);
+    UserInfoEntity selectByUserId(String userId);
+
+    UserInfoEntity findByUserCode(String userCode);
 }

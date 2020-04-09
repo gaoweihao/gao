@@ -1,38 +1,31 @@
 package com.flowable.springboot.controller;
 
 import com.flowable.springboot.bean.UserInfoEntity;
+import com.flowable.springboot.responseBean.BaseResponse;
 import com.flowable.springboot.service.UserInfoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/userInfo")
+@Api(value = "UserInfoController",tags = "用户管理")
 public class UserInfoController {
 
     @Autowired
     private UserInfoService userInfoService;
 
-    /**
-     * 保存用户信息
-     *
-     * @param user
-     */
-    @RequestMapping("/user")
+    @PatchMapping("/user")
+    @ApiOperation("保存用户信息")
     public void save(UserInfoEntity user) {
         userInfoService.save(user);
     }
 
-    /**
-     * 通过用户主键查询用户
-     *
-     * @param userId
-     */
-    @RequestMapping("/select-by-userId/{userId}")
-    public UserInfoEntity selectByUserId(@PathVariable long userId) {
+    @GetMapping("/select-by-userId/{userId}")
+    @ApiOperation(value = "通过用户主键查询用户")
+    public BaseResponse selectByUserId(@PathVariable String userId) {
         UserInfoEntity user = userInfoService.selectByUserId(userId);
-        System.out.println(user.getUserName());
-       return userInfoService.selectByUserId(userId);
+       return new BaseResponse(200,user);
     }
 }

@@ -12,6 +12,9 @@ spring:
 mybatis:
   mapper-locations: classpath*:com/flowable/springboot/mapper/*.xml
 
+#配置的请求路径ip
+task_url: http://10:16:23:24:8881
+
 #启用 flowable 端点
 management:
   endpoint:

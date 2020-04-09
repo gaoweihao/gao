@@ -1,4 +1,4 @@
-package com.flowable.springboot.common;
+package com.flowable.springboot.bean;
 
 import java.io.Serializable;
 

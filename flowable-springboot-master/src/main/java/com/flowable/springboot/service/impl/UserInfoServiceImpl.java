@@ -18,7 +18,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
-    public UserInfoEntity selectByUserId(long userId) {
+    public UserInfoEntity selectByUserId(String userId) {
         return userInfoDao.selectByUserId(userId);
+    }
+
+    @Override
+    public UserInfoEntity findByUserCode(String userCode) {
+        return userInfoDao.findByUserCode(userCode);
     }
 }

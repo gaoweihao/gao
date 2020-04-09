@@ -4,27 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.flowable.springboot.dao.UserInfoDao">
     <resultMap id="userInfoMap" type="com.flowable.springboot.bean.UserInfoEntity">
-        <id property="id" column="ID" jdbcType="BIGINT"/>
-        <result property="username" column="USER_NAME" jdbcType="VARCHAR"/>
-        <result property="firstName" column="FIRST_NAME" jdbcType="VARCHAR"/>
-        <result property="lastName" column="LAST_NAME" jdbcType="VARCHAR"/>
-        <result property="birthDate" column="BIRTH_DATE" jdbcType="TIMESTAMP"/>
+        <id property="userId" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userCode" column="user_code"/>
+        <result property="password" column="password"/>
     </resultMap>
 
     <select id="findByUsername" parameterType="String" resultMap="userInfoMap">
-        select ID,USER_NAME FROM user_info WHERE USER_NAME = #{userName}
+        select ID,USER_NAME FROM sys_user_info WHERE USER_NAME = #{userName}
     </select>
 
     <select id="save" parameterType="com.flowable.springboot.bean.UserInfoEntity" resultType="int">
-        INSERT INTO user_info(USER_NAME,FIRST_NAME,LAST_NAME,LAST_NAME) VALUES(#{userName},#{firstName},#{lastName},#{birthDate})
+        INSERT INTO sys_user_info(id,user_name,user_code)
+        VALUES(#{id},#{userName},#{userCode})
     </select>
 
     <select id="findList" resultMap="userInfoMap">
-        SELECT ID,USER_NAME,FIRST_NAME,LAST_NAME ,LAST_NAME FROM user_info
+        SELECT id,user_name,user_code FROM sys_user_info
     </select>
 
-    <select id="selectByUserId" parameterType="long" resultMap="userInfoMap">
-        select ID,USER_NAME FROM user_info WHERE id = #{userId}
+    <select id="selectByUserId" parameterType="String" resultMap="userInfoMap">
+        select id,user_name,user_code FROM sys_user_info WHERE id = #{userId}
+    </select>
+
+    <select id="findByUserCode" parameterType="String" resultType="com.flowable.springboot.bean.UserInfoEntity">
+      SELECT user_id, user_name, user_code, password
+      FROM sys_user_info
+      WHERE user_code = #{userCode}
     </select>
 
 </mapper>
