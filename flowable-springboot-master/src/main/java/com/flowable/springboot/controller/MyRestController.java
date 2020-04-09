@@ -1,11 +1,14 @@
 package com.flowable.springboot.controller;
 
 import com.flowable.springboot.service.MyService;
+import io.swagger.annotations.Api;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +16,9 @@ import java.util.List;
 /**
  *测试flowable 使用，可以删除
  * */
-@Controller
+@RestController
 @RequestMapping("/myrest")
+@Api(value = "MyRestController",tags = "flowable 测试Controller")
 public class MyRestController {
 
     @Autowired

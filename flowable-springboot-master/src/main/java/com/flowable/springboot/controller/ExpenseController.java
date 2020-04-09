@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.flowable.springboot.bean.ExpenseEntity;
 import com.flowable.springboot.service.ExpenseService;
 import com.flowable.springboot.service.RoleService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/expense")
+@Api(value = "ExpenseController",tags = "财务demo示例controller")
 public class ExpenseController {
 
     @Autowired
