@@ -13,8 +13,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserInfoDao userInfoDao;
 
     @Override
-    public int save(UserInfoEntity user) {
-        return userInfoDao.save(user);
+    public void save(UserInfoEntity user) {
+         userInfoDao.save(user);
     }
 
     @Override

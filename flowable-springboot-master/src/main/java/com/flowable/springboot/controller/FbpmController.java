@@ -21,20 +21,20 @@ public class FbpmController {
     private FbpmService fbpmService;
 
     @ApiOperation(value="fbpm批量启动流程")
-    @PutMapping("/fbpm-batch-process-instances")
-    public BaseResponse batchProcessInstances(){
-        ProcessStartQuery processStart = new ProcessStartQuery();
+    @PatchMapping("/fbpm-batch-process-instances")
+    public BaseResponse batchProcessInstances(@RequestBody ProcessStartQuery processStart) throws IllegalAccessException {
+
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/fbpm-process-instances-batchCreateInstance";
         BaseResponse response = fbpmService.batchProcessInstance(url,processStart);
+
         return response;
 
     }
 
     @ApiOperation(value="fbpm批量审核流程")
-    @PutMapping("/fbpm-batch-process-approve")
-    public BaseResponse batchProcessApprove(){
-        ProcessApproveQuery processApprove =new ProcessApproveQuery();
+    @PatchMapping("/fbpm-batch-process-approve")
+    public BaseResponse batchProcessApprove(@RequestBody ProcessApproveQuery processApprove){
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/approve-batch-tasks-new";
         BaseResponse response = fbpmService.batchProcessApprove(url,processApprove);
@@ -42,35 +42,48 @@ public class FbpmController {
 
     }
 
-    @ApiOperation(value="fbpm批量审核流程")
+    @ApiOperation(value="fbpm批量驳回流程")
     @PutMapping("/fbpm-batch-process-back")
     public BaseResponse batchProcessBack(){
         ProcessBackQuery processBack =new ProcessBackQuery();
+        processBack.setUserCode("111111");
+        processBack.setTaskIds("3326648034868388934");
         //批量启动远程接口
-        String url = taskUrl+"/api/runtime/approve-batch-tasks-new";
+        String url = taskUrl+"/api/runtime/back-batch-tasks";
         BaseResponse response = fbpmService.batchProcessBack(url,processBack);
         return response;
 
     }
 
-    @ApiOperation(value="fbpm批量审核流程")
+    @ApiOperation(value="fbpm批量撤销流程")
     @PutMapping("/fbpm-batch-process-cancel")
     public BaseResponse batchProcessCancel(){
         ProcessCancelQuery processCancel =new ProcessCancelQuery();
         //批量启动远程接口
-        String url = taskUrl+"/api/runtime/approve-batch-tasks-new";
+        String url = taskUrl+"/api/runtime/batch-cancel-tasks";
         BaseResponse response = fbpmService.batchProcessCancel(url,processCancel);
         return response;
 
     }
 
-    @ApiOperation(value="fbpm查询代办任务接口")
+    @ApiOperation(value="fbpm查询待办任务接口")
     @GetMapping("/fbpm-select-task-list-state/{state}")
     public BaseResponse selectTaskListByState(@PathVariable String state){
         TaskStateQuery taskStat =new TaskStateQuery();
         //批量启动远程接口
         String url = taskUrl+"/api/runtime/fbpm-user-state-task/taskList/"+state;
         BaseResponse response = fbpmService.selectTaskListByState(url,taskStat);
+        return response;
+
+    }
+
+    @ApiOperation(value="fbpm查询已办任务接口")
+    @GetMapping("/fbpm-select-task-finish-list")
+    public BaseResponse selectTaskFinishList(@PathVariable String state){
+        TaskFinishQuery taskFinish =new TaskFinishQuery();
+        //批量启动远程接口
+        String url = taskUrl+"/api/runtime/fbpm-user-finished-task/finishedTaskList";
+        BaseResponse response = fbpmService.selectTaskFinishList(url,taskFinish);
         return response;
 
     }

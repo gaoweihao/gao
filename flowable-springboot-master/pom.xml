@@ -90,7 +90,55 @@
             <version>2.7.0</version>
         </dependency>
         <!-- swagger 依赖结束-->
+
+        <!-- lcn 依赖开始-->
+        <dependency>
+            <groupId>com.crux</groupId>
+            <artifactId>crux-txlcn</artifactId>
+            <version>3.0.3</version>
+        </dependency>
+        <!--dependency>
+            <groupId>com.codingapi.txlcn</groupId>
+            <artifactId>txlcn-tc</artifactId>
+            <version>5.0.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.codingapi.txlcn</groupId>
+            <artifactId>txlcn-tm</artifactId>
+            <version>5.0.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.codingapi.txlcn</groupId>
+            <artifactId>txlcn-txmsg-netty</artifactId>
+            <version>5.0.2.RELEASE</version>
+        </dependency-->
+        <!-- lcn 依赖结束-->
     </dependencies>
+    <repositories>
+        <repository>
+            <id>cruxmaven</id>
+            <url>http://maven.ufgov.com.cn/nexus/content/groups/crux</url>
+        </repository>
+        <repository>
+            <id>crux</id>
+            <url>http://maven.ufgov.com.cn/nexus/content/groups/crux</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
+        <repository>
+            <id>dfcloudmaven</id>
+            <url>http://maven.ufgov.com.cn/nexus/content/groups/dfcloud</url>
+        </repository>
+    </repositories>
+
 
     <build>
         <resources>

@@ -4,7 +4,7 @@ import com.flowable.springboot.bean.UserInfoEntity;
 
 public interface UserInfoService{
 
-    int save(UserInfoEntity user);
+    void save(UserInfoEntity user);
 
     UserInfoEntity selectByUserId(String userId);
 

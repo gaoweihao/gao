@@ -1,19 +1,29 @@
 server:
-  port: 8080
+  port: 8077
   servlet:
     context-path: /flowable-master
 
 spring:
+  application:
+    name: flowable-master
   datasource:
-    url: jdbc:mysql://localhost:3306/test_flowable?serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/test_flowable?serverTimezone=UTC&characterEncoding=UTF8
     username: root
     password: 123456
 
 mybatis:
   mapper-locations: classpath*:com/flowable/springboot/mapper/*.xml
 
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070
+
+logging:
+  level:
+    com.flowable.springboot.dao: debug
+
 #配置的请求路径ip
-task_url: http://10:16:23:24:8881
+task_url: http://192.168.1.3:8079/fbpm-process
 
 #启用 flowable 端点
 management:

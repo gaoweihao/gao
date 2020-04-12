@@ -7,7 +7,8 @@ public class BaseResponse implements Serializable {
     //响应结果(100200为正确，其他值均为异常)
     private int code;
     //异常信息
-    private String message;
+    private String msg;
+
     //数据信息
     private Object data;
 
@@ -20,9 +21,9 @@ public class BaseResponse implements Serializable {
         this.code = code;
         this.data = data;
     }
-    public BaseResponse(int code,String message,Object data){
+    public BaseResponse(int code,String msg,Object data){
         this.code = code;
-        this.message = message;
+        this.msg = msg;
         this.data = data;
     }
 
@@ -34,12 +35,12 @@ public class BaseResponse implements Serializable {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public Object getData() {

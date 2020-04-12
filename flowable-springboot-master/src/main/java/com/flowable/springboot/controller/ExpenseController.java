@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/expense")
-@Api(value = "ExpenseController",tags = "财务demo示例controller")
+@Api(value = "ExpenseController",tags = "财务demo示例")
 public class ExpenseController {
 
     @Autowired

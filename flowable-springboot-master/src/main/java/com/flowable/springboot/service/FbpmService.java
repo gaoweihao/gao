@@ -5,7 +5,7 @@ import com.flowable.springboot.responseBean.BaseResponse;
 
 public interface FbpmService {
 
-    BaseResponse batchProcessInstance(String taskUrl, ProcessStartQuery processStart);
+    BaseResponse batchProcessInstance(String taskUrl, ProcessStartQuery processStart) throws IllegalAccessException;
 
     BaseResponse batchProcessApprove(String url, ProcessApproveQuery processApprove);
 
@@ -14,4 +14,7 @@ public interface FbpmService {
     BaseResponse batchProcessCancel(String url, ProcessCancelQuery processCancel);
 
     BaseResponse selectTaskListByState(String url, TaskStateQuery taskStat);
+
+    BaseResponse selectTaskFinishList(String url, TaskFinishQuery taskFinish);
+
 }
